@@ -6,10 +6,10 @@ export default initialValues => {
   const store = mockStore(initialValues)
 
   return {
-    Mutation(parent, args) {
+    Mutation() {
       return {
-        createTweet() {
-          const newTweet = { id: uniqid() }
+        createTweet(parent, args) {
+          const newTweet = { id: uniqid(), body: args.body }
           store.set(newTweet.id, newTweet)
           return newTweet
         },
