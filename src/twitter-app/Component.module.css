@@ -1,0 +1,11 @@
+
+.tweets {
+  width: 48rem;
+} 
+
+.tweet {
+}
+
+.button {
+  composes: text-white py-1 px-3 rounded from global;
+}

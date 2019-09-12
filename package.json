@@ -3,15 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@swrve/react-scripts": "2.4.0",
+    "@alanquigley/react-scripts": "3.1.1",
+    "@testing-library/dom": "^6.2.0",
+    "@testing-library/react": "^9.1.4",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link-schema": "^1.2.4",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-import-graphql": "^2.7.0",
+    "classname": "^0.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "faker": "^4.1.0",
+    "graphql": "^14.5.4",
+    "graphql-tools": "^4.0.5",
+    "graphql.macro": "^1.4.2",
+    "jest-transform-graphql": "^2.1.0",
+    "prettier": "^1.18.2",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-apollo": "^3.1.0",
+    "react-dom": "^16.9.0",
+    "tailwindcss": "^1.1.2",
+    "uniqid": "^5.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +41,13 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@storybook/addon-actions": "^5.1.11",
+    "@storybook/addon-links": "^5.1.11",
+    "@storybook/addons": "^5.1.11",
+    "@storybook/react": "^5.1.11",
+    "babel-loader": "^8.0.6"
+  }
 }
