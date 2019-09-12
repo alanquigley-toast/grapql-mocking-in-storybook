@@ -1,0 +1,9 @@
+@import 'tailwindcss/preflight';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import '@swrve/tailwind-config';
+
+.header {
+  @apply .bg-mountainGreen-100 .text-cloudWhite .text-center py-16;
+}
