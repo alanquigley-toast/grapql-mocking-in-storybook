@@ -41,7 +41,7 @@ const Component = props => {
     'loading...'
   ) : (
     <div className={cx(styles.tweets, 'p-8')}>
-      <h1 className="text-6xl text-toast font-bold">Mocking Tweets</h1>
+      <h1 className="text-6xl text-toast font-bold">Toast Tweets</h1>
       <div data-testid="tweet-container">
         {data.Tweets.map((tweet, index) => (
           <div
@@ -86,7 +86,7 @@ const Component = props => {
         <textarea
           data-testid="tweet-input"
           className="border rounded border-grey-2 w-full p-2"
-          placeholder="Heavy on the sarcasm..."
+          placeholder="Say something..."
           value={tweetValue}
           onChange={e => setTweetValue(e.target.value)}
         ></textarea>
