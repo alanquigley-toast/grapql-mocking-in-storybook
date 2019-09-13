@@ -24,7 +24,7 @@ describe('my integration test', () => {
       { id: '3', body: 'I am not faked!' } // Body is explictly set here.
     ]
 
-    const { debug, getByTestId, getByText, queryByText } = render( // eslint-disable-line
+    const { debug, getByTestId, queryByTestId, getByText, queryByText } = render( // eslint-disable-line
       <ApolloProvider
         client={createClient(schemaString, mockResolvers(initialValues))}
       >
@@ -43,9 +43,12 @@ describe('my integration test', () => {
     const deleteBtn0 = await getByTestId('delete-tweet-btn-0')
     const deleteBtn1 = await getByTestId('delete-tweet-btn-1')
     const deleteBtn2 = await getByTestId('delete-tweet-btn-2')
+    const nonExistingdeleteBtn3 = await queryByTestId('delete-tweet-btn-3')
+
     expect(deleteBtn0).toBeInTheDocument()
     expect(deleteBtn1).toBeInTheDocument()
     expect(deleteBtn2).toBeInTheDocument()
+    expect(nonExistingdeleteBtn3).toBeNull()
 
     // Fill out the Tweet form with a value
     fireEvent.change(tweetInput, {
@@ -68,6 +71,8 @@ describe('my integration test', () => {
 
     // Wait for the round trip to happen
     await wait()
+
+    // The tweet no longer exists
     expect(queryByText('a test tweet that will get added to the UI')).toBeNull()
   })
 })
