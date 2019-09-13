@@ -5,7 +5,10 @@ import cx from 'classname'
 import { GET_ALL_TWEETS, CREATE_TWEET, DELETE_TWEET } from './queries'
 
 const Component = props => {
+  const [tweetValue, setTweetValue] = React.useState()
+
   const { data, loading } = useQuery(GET_ALL_TWEETS)
+
   const [createTweet] = useMutation(CREATE_TWEET, {
     update(store, result) {
       const data = store.readQuery({
@@ -13,8 +16,12 @@ const Component = props => {
       })
       data.Tweets.push(result.data.createTweet)
       store.writeQuery({ query: GET_ALL_TWEETS, data })
+    },
+    onCompleted() {
+      setTweetValue('')
     }
   })
+
   const [deleteTweet] = useMutation(DELETE_TWEET, {
     update(store, result) {
       const data = store.readQuery({
@@ -60,7 +67,10 @@ const Component = props => {
             </div>
             <button
               data-testid={`delete-tweet-btn-${index}`}
-              className={cx(styles.button, 'bg-toast hover:bg-toast-burnt')}
+              className={cx(
+                styles.button,
+                'bg-toast hover:bg-toast-burnt ml-2'
+              )}
               onClick={() => {
                 return deleteTweet({
                   variables: { id: tweet.id }
@@ -72,13 +82,22 @@ const Component = props => {
           </div>
         ))}
       </div>
-      <button
-        data-testid="add-tweet-btn"
-        className={cx(styles.button, 'bg-primary hover:bg-primary-dark')}
-        onClick={() => createTweet({ variables: { body: 'I am new' } })}
-      >
-        Add New Tweet
-      </button>
+      <div>
+        <textarea
+          data-testid="tweet-input"
+          className="border rounded border-grey-2 w-full p-2"
+          placeholder="Heavy on the sarcasm..."
+          value={tweetValue}
+          onChange={e => setTweetValue(e.target.value)}
+        ></textarea>
+        <button
+          data-testid="add-tweet-btn"
+          className={cx(styles.button, 'bg-primary hover:bg-primary-dark')}
+          onClick={() => createTweet({ variables: { body: tweetValue } })}
+        >
+          Add New Tweet
+        </button>
+      </div>
     </div>
   )
 }

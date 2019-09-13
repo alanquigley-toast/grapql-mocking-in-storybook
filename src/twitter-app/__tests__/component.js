@@ -1,10 +1,11 @@
 import React from 'react'
-import { render, wait, fireEvent } from '@testing-library/react'
+import { render, wait, fireEvent, getByText } from '@testing-library/react'
 import Component from '../Component'
 import { ApolloProvider } from 'react-apollo'
 import createClient from '../client'
 import mockResolvers from '../mockResolvers'
 import { loader } from 'graphql.macro'
+import expectExport from 'expect'
 const schemaString = loader('../schema.graphql')
 
 console.error = jest.fn()
@@ -17,7 +18,7 @@ describe('my integration test', () => {
       { id: '3', body: 'I am not faked!' } // Body is explictly set here.
     ]
 
-    const { debug, getByTestId } = render(
+    const { debug, getByTestId, getByText } = render( // eslint-disable-line
       <ApolloProvider
         client={createClient(schemaString, mockResolvers(initialValues))}
       >
@@ -27,23 +28,33 @@ describe('my integration test', () => {
     // wait for the loading to complete.
     await wait()
 
-    // get the tweet container.
-    const tweetContainer = await getByTestId('tweet-container')
-
     // grab the buttons.
+    const tweetInput = await getByTestId('tweet-input')
     const addTweetBtn = await getByTestId('add-tweet-btn')
 
-    // delete buttons.
+    // delete buttons - check that they are accessible..
+
     const deleteBtn0 = await getByTestId('delete-tweet-btn-0')
     const deleteBtn1 = await getByTestId('delete-tweet-btn-1')
     const deleteBtn2 = await getByTestId('delete-tweet-btn-2')
+    expect(deleteBtn0).toBeInTheDocument()
+    expect(deleteBtn1).toBeInTheDocument()
+    expect(deleteBtn2).toBeInTheDocument()
 
-    // click the button too add a new element.
+    // Fill out the Tweet form with a value
+    fireEvent.change(tweetInput, {
+      target: { value: 'a test tweet that will get added to the UI' }
+    })
+    // Click the submit button.
     fireEvent.click(addTweetBtn)
-    // wait for the addition to complete.
+
+    // wait for the graphql roundtrip to complete.
     await wait()
 
-    debug(tweetContainer)
-    // debug()
+    // Test that the new Tweet has been added.
+    const newTweet = getByText('a test tweet that will get added to the UI')
+    expect(newTweet).toBeInTheDocument()
+
+    debug()
   })
 })

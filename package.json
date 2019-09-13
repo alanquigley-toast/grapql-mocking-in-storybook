@@ -5,6 +5,7 @@
   "dependencies": {
     "@alanquigley/react-scripts": "3.1.1",
     "@testing-library/dom": "^6.2.0",
+    "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/react": "^9.1.4",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
