@@ -1,6 +1,6 @@
 # Mocking Tweets
 
-This project is designed to demonstrate an interesting way of GraphQL within Storybook. This technique allows full integration testing of components that are independant of an external api. These components could can be packaged, released and used anywhere within the scope of the Toast graphql schema.
+This project is designed to demonstrate an interesting way of mocking GraphQL within Storybook. This technique allows full integration testing of components, independantly of an external api. These components could can be packaged, released and used anywhere within the scope of the Toast graphql schema.
 
 ## Available Scripts
 
