@@ -1,5 +1,11 @@
 import React from 'react'
-import { render, wait, fireEvent, getByText } from '@testing-library/react'
+import {
+  render,
+  wait,
+  fireEvent,
+  getByText,
+  queryByText
+} from '@testing-library/react'
 import Component from '../Component'
 import { ApolloProvider } from 'react-apollo'
 import createClient from '../client'
@@ -18,7 +24,7 @@ describe('my integration test', () => {
       { id: '3', body: 'I am not faked!' } // Body is explictly set here.
     ]
 
-    const { debug, getByTestId, getByText } = render( // eslint-disable-line
+    const { debug, getByTestId, getByText, queryByText } = render( // eslint-disable-line
       <ApolloProvider
         client={createClient(schemaString, mockResolvers(initialValues))}
       >
@@ -55,6 +61,13 @@ describe('my integration test', () => {
     const newTweet = getByText('a test tweet that will get added to the UI')
     expect(newTweet).toBeInTheDocument()
 
-    debug()
+    // Test that we can delete it again.
+    const deleteBtn3 = await getByTestId('delete-tweet-btn-3')
+    expect(deleteBtn3).toBeInTheDocument()
+    fireEvent.click(deleteBtn3)
+
+    // Wait for the round trip to happen
+    await wait()
+    expect(queryByText('a test tweet that will get added to the UI')).toBeNull()
   })
 })
