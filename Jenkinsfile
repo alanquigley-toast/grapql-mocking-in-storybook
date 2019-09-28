@@ -4,6 +4,7 @@ pipeline {
     stage('first') {
       steps {
         echo 'Hello world'
+        sh 'yarn test'
       }
     }
   }
