@@ -41,7 +41,7 @@ const Component = props => {
     'loading...'
   ) : (
     <div className={cx(styles.tweets, 'p-8')}>
-      <h1 className="text-5xl text-toast font-bold">Toast Tweets</h1>
+      <h1 styleName="text-5xl text-toast font-bold">Toast Tweets</h1>
       <div data-testid="tweet-container">
         {data.Tweets.map((tweet, index) => (
           <div
