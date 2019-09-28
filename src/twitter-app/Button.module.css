@@ -1,0 +1,4 @@
+.btn {
+  display: inline-block;
+  composes: bg-toast text-black rounded px-4 py-2 m-8 from global;
+}

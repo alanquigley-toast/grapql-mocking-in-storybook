@@ -5,6 +5,7 @@ import createClient from './client'
 import schemaString from './schema.graphql'
 import Component from './Component'
 import mockResolvers from './mockResolvers'
+import Button from './Button'
 
 const stories = storiesOf('Connected component', module)
 const initialValues = [
@@ -18,5 +19,13 @@ stories.add('A simple example', () => (
     client={createClient(schemaString, mockResolvers(initialValues))}
   >
     <Component />
+  </ApolloProvider>
+))
+
+stories.add('A tailwind example', () => (
+  <ApolloProvider
+    client={createClient(schemaString, mockResolvers(initialValues))}
+  >
+    <Button />
   </ApolloProvider>
 ))

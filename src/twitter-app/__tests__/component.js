@@ -1,17 +1,10 @@
 import React from 'react'
-import {
-  render,
-  wait,
-  fireEvent,
-  getByText,
-  queryByText
-} from '@testing-library/react'
+import { render, wait, fireEvent } from '@testing-library/react'
 import Component from '../Component'
 import { ApolloProvider } from 'react-apollo'
 import createClient from '../client'
 import mockResolvers from '../mockResolvers'
 import { loader } from 'graphql.macro'
-import expectExport from 'expect'
 const schemaString = loader('../schema.graphql')
 
 console.error = jest.fn()
