@@ -1,9 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('first') {
+    stage('prepare') {
       steps {
-        echo 'Hello world'
+        sh '''npm install -g yarn && yarn install
+'''
+      }
+    }
+    stage('') {
+      steps {
         sh 'yarn test'
       }
     }
