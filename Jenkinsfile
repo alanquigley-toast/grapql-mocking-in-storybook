@@ -3,11 +3,10 @@ pipeline {
   stages {
     stage('prepare') {
       steps {
-        sh '''npm install -g yarn && yarn install
-'''
+        sh 'curl -o- -L https://yarnpkg.com/install.sh | bash'
       }
     }
-    stage('') {
+    stage('error') {
       steps {
         sh 'yarn test'
       }
